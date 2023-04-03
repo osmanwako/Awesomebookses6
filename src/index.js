@@ -19,9 +19,7 @@ const addbook = (event) => {
   event.target.reset();
 };
 
-const isbookstored = () => {
-  return localStorage.getItem('awesomebookslist');
-};
+const isbookstored = () => localStorage.getItem('awesomebookslist');
 
 const loadbook = () => {
   if (isbookstored()) {
