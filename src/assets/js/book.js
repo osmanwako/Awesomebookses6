@@ -1,4 +1,4 @@
-export class Book {
+export default class Book {
   static lists = [];
 
   constructor(title, author) {

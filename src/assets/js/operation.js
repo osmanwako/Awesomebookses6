@@ -1,4 +1,4 @@
-export const viewtab = (event) => {
+const viewtab = (event) => {
   const id = `awesome${event.target.id}`;
   const prevlink = document.querySelector('a.active');
   const sectionhide = document.querySelector('section.d-flex');
@@ -10,3 +10,5 @@ export const viewtab = (event) => {
   event.target.classList.toggle('active');
   prevlink.classList.toggle('active');
 };
+
+export default viewtab;
