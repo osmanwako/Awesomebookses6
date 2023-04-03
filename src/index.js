@@ -1,6 +1,11 @@
 import { DateTime } from 'luxon';
 import Book from './assets/js/book.js';
-import { bookform, booklist, booknavs, booknow } from './assets/js/elements.js';
+import {
+  bookform,
+  booklist,
+  booknavs,
+  booktimenow,
+} from './assets/js/elements.js';
 import viewtab from './assets/js/operation.js';
 
 const addbook = (event) => {
@@ -19,19 +24,19 @@ const isbookstored = () => {
 };
 
 const loadbook = () => {
-  if (!isbookstored()) return;
-
-  Book.lists = JSON.parse(localStorage.getItem('awesomebookslist'));
-  Book.lists.forEach((element) => {
-    const book = Object.assign(new Book(), element);
-    const data = book.getcontainer();
-    booklist.append(data);
-  });
+  if (isbookstored()) {
+    Book.lists = JSON.parse(localStorage.getItem('awesomebookslist'));
+    Book.lists.forEach((element) => {
+      const book = Object.assign(new Book(), element);
+      const data = book.getcontainer();
+      booklist.append(data);
+    });
+  }
 };
 
 const gettimenow = () => {
   const date = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
-  booknow.textContent = date;
+  booktimenow.textContent = date;
 };
 
 const start = () => {
