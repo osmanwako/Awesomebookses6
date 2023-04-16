@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
-import Book from './assets/js/book.js';
+import Book from './js/book.js';
 import {
   bookform,
   booklist,
   booknavs,
   booktimenow,
-} from './assets/js/elements.js';
-import viewtab from './assets/js/operation.js';
+} from './js/dom_elements.js';
+import viewtab from './js/operation.js';
 
 const addbook = (event) => {
   const title = event.target.elements.title.value;
