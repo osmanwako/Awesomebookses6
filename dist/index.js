@@ -10,43 +10,43 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/assets/js/book.js":
-/*!*******************************!*\
-  !*** ./src/assets/js/book.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Book)\n/* harmony export */ });\nclass Book {\r\n  static lists = [];\r\n\r\n  constructor(title, author) {\r\n    this.title = title;\r\n    this.author = author;\r\n    this.listid = `book${Date.now()}`;\r\n  }\r\n\r\n  addbook() {\r\n    Book.lists = [...Book.lists, this];\r\n    Book.storebook();\r\n  }\r\n\r\n  static storebook() {\r\n    localStorage.setItem('awesomebookslist', JSON.stringify(Book.lists));\r\n  }\r\n\r\n  static DeleteBook(event) {\r\n    const parent = event.target.parentElement;\r\n    const id = `${event.target.id}`;\r\n    Book.lists = Book.lists.filter((book) => book.listid !== id);\r\n    Book.storebook();\r\n    if (parent) parent.remove();\r\n  }\r\n\r\n  createbutton() {\r\n    const button = document.createElement('input');\r\n    button.type = 'button';\r\n    button.name = 'removebtn';\r\n    button.className = 'button-remove';\r\n    button.value = 'Remove';\r\n    button.id = this.listid;\r\n    button.addEventListener('click', Book.DeleteBook);\r\n    return button;\r\n  }\r\n\r\n  createparagraph() {\r\n    const p = document.createElement('p');\r\n    p.className = 'p-title-author';\r\n    p.textContent = `${this.title} by ${this.author}`;\r\n    return p;\r\n  }\r\n\r\n  getcontainer() {\r\n    const div = document.createElement('div');\r\n    div.className = 'book-list';\r\n    div.append(this.createparagraph(), this.createbutton());\r\n    return div;\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/assets/js/book.js?");
-
-/***/ }),
-
-/***/ "./src/assets/js/elements.js":
-/*!***********************************!*\
-  !*** ./src/assets/js/elements.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"bookform\": () => (/* binding */ bookform),\n/* harmony export */   \"booklist\": () => (/* binding */ booklist),\n/* harmony export */   \"booknavs\": () => (/* binding */ booknavs),\n/* harmony export */   \"booktimenow\": () => (/* binding */ booktimenow)\n/* harmony export */ });\nconst bookform = document.getElementById('form-asm-bookid');\r\nconst booklist = document.getElementById('awesomebookslist');\r\nconst booknavs = document.querySelectorAll('.nav-link');\r\nconst booktimenow = document.getElementById('section-date-now');\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/assets/js/elements.js?");
-
-/***/ }),
-
-/***/ "./src/assets/js/operation.js":
-/*!************************************!*\
-  !*** ./src/assets/js/operation.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst viewtab = (event) => {\r\n  const id = `awesome${event.target.id}`;\r\n  const prevlink = document.querySelector('a.active');\r\n  const sectionhide = document.querySelector('section.d-flex');\r\n  const sectionview = document.getElementById(id);\r\n  sectionhide.classList.toggle('d-flex');\r\n  sectionhide.classList.toggle('d-none');\r\n  sectionview.classList.toggle('d-flex');\r\n  sectionview.classList.toggle('d-none');\r\n  event.target.classList.toggle('active');\r\n  prevlink.classList.toggle('active');\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (viewtab);\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/assets/js/operation.js?");
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! luxon */ \"./node_modules/luxon/src/luxon.js\");\n/* harmony import */ var _assets_js_book_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/js/book.js */ \"./src/assets/js/book.js\");\n/* harmony import */ var _assets_js_elements_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/js/elements.js */ \"./src/assets/js/elements.js\");\n/* harmony import */ var _assets_js_operation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./assets/js/operation.js */ \"./src/assets/js/operation.js\");\n\r\n\r\n\r\n\r\n\r\nconst addbook = (event) => {\r\n  const title = event.target.elements.title.value;\r\n  const author = event.target.elements.author.value;\r\n  const book = new _assets_js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"](title, author);\r\n  book.addbook();\r\n  const data = book.getcontainer();\r\n  _assets_js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booklist.append(data);\r\n  event.preventDefault();\r\n  event.target.reset();\r\n};\r\n\r\nconst isbookstored = () => {\r\n  return localStorage.getItem('awesomebookslist');\r\n};\r\n\r\nconst loadbook = () => {\r\n  if (isbookstored()) {\r\n    _assets_js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].lists = JSON.parse(localStorage.getItem('awesomebookslist'));\r\n    _assets_js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].lists.forEach((element) => {\r\n      const book = Object.assign(new _assets_js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"](), element);\r\n      const data = book.getcontainer();\r\n      _assets_js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booklist.append(data);\r\n    });\r\n  }\r\n};\r\n\r\nconst gettimenow = () => {\r\n  const date = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now().toLocaleString(luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.DATETIME_MED);\r\n  _assets_js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booktimenow.textContent = date;\r\n};\r\n\r\nconst start = () => {\r\n  _assets_js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booknavs.forEach((nav) => {\r\n    nav.addEventListener('click', _assets_js_operation_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"]);\r\n  });\r\n  gettimenow();\r\n  _assets_js_elements_js__WEBPACK_IMPORTED_MODULE_2__.bookform.addEventListener('submit', addbook);\r\n  loadbook();\r\n};\r\n\r\nstart();\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! luxon */ \"./node_modules/luxon/src/luxon.js\");\n/* harmony import */ var _js_book_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/book.js */ \"./src/js/book.js\");\n/* harmony import */ var _js_elements_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/elements.js */ \"./src/js/elements.js\");\n/* harmony import */ var _js_operation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/operation.js */ \"./src/js/operation.js\");\n\r\n\r\n\r\n\r\n\r\nconst addbook = (event) => {\r\n  const title = event.target.elements.title.value;\r\n  const author = event.target.elements.author.value;\r\n  const book = new _js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"](title, author);\r\n  book.addbook();\r\n  const data = book.getcontainer();\r\n  _js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booklist.append(data);\r\n  event.preventDefault();\r\n  event.target.reset();\r\n};\r\n\r\nconst isbookstored = () => localStorage.getItem('awesomebookslist');\r\n\r\nconst loadbook = () => {\r\n  if (isbookstored()) {\r\n    _js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].lists = JSON.parse(localStorage.getItem('awesomebookslist'));\r\n    _js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].lists.forEach((element) => {\r\n      const book = Object.assign(new _js_book_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"](), element);\r\n      const data = book.getcontainer();\r\n      _js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booklist.append(data);\r\n    });\r\n  }\r\n};\r\n\r\nconst gettimenow = () => {\r\n  const date = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now().toLocaleString(luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.DATETIME_MED);\r\n  _js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booktimenow.textContent = date;\r\n};\r\n\r\nconst start = () => {\r\n  _js_elements_js__WEBPACK_IMPORTED_MODULE_2__.booknavs.forEach((nav) => {\r\n    nav.addEventListener('click', _js_operation_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"]);\r\n  });\r\n  gettimenow();\r\n  _js_elements_js__WEBPACK_IMPORTED_MODULE_2__.bookform.addEventListener('submit', addbook);\r\n  loadbook();\r\n};\r\n\r\nstart();\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/book.js":
+/*!************************!*\
+  !*** ./src/js/book.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Book)\n/* harmony export */ });\nclass Book {\r\n  static lists = [];\r\n\r\n  constructor(title, author) {\r\n    this.title = title;\r\n    this.author = author;\r\n    this.listid = `book${Date.now()}`;\r\n  }\r\n\r\n  addbook() {\r\n    Book.lists = [...Book.lists, this];\r\n    Book.storebook();\r\n  }\r\n\r\n  static storebook() {\r\n    localStorage.setItem('awesomebookslist', JSON.stringify(Book.lists));\r\n  }\r\n\r\n  static DeleteBook(event) {\r\n    const parent = event.target.parentElement;\r\n    const id = `${event.target.id}`;\r\n    Book.lists = Book.lists.filter((book) => book.listid !== id);\r\n    Book.storebook();\r\n    if (parent) parent.remove();\r\n  }\r\n\r\n  createbutton() {\r\n    const button = document.createElement('input');\r\n    button.type = 'button';\r\n    button.name = 'removebtn';\r\n    button.className = 'button-remove';\r\n    button.value = 'Remove';\r\n    button.id = this.listid;\r\n    button.addEventListener('click', Book.DeleteBook);\r\n    return button;\r\n  }\r\n\r\n  createparagraph() {\r\n    const p = document.createElement('p');\r\n    p.className = 'p-title-author';\r\n    p.textContent = `${this.title} by ${this.author}`;\r\n    return p;\r\n  }\r\n\r\n  getcontainer() {\r\n    const div = document.createElement('div');\r\n    div.className = 'book-list';\r\n    div.append(this.createparagraph(), this.createbutton());\r\n    return div;\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/js/book.js?");
+
+/***/ }),
+
+/***/ "./src/js/elements.js":
+/*!****************************!*\
+  !*** ./src/js/elements.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"bookform\": () => (/* binding */ bookform),\n/* harmony export */   \"booklist\": () => (/* binding */ booklist),\n/* harmony export */   \"booknavs\": () => (/* binding */ booknavs),\n/* harmony export */   \"booktimenow\": () => (/* binding */ booktimenow)\n/* harmony export */ });\nconst bookform = document.getElementById('form-asm-bookid');\r\nconst booklist = document.getElementById('awesomebookslist');\r\nconst booknavs = document.querySelectorAll('.nav-link');\r\nconst booktimenow = document.getElementById('section-date-now');\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/js/elements.js?");
+
+/***/ }),
+
+/***/ "./src/js/operation.js":
+/*!*****************************!*\
+  !*** ./src/js/operation.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst viewtab = (event) => {\r\n  const id = `awesome${event.target.id}`;\r\n  const prevlink = document.querySelector('a.active');\r\n  const sectionhide = document.querySelector('section.d-flex');\r\n  const sectionview = document.getElementById(id);\r\n  sectionhide.classList.toggle('d-flex');\r\n  sectionhide.classList.toggle('d-none');\r\n  sectionview.classList.toggle('d-flex');\r\n  sectionview.classList.toggle('d-none');\r\n  event.target.classList.toggle('active');\r\n  prevlink.classList.toggle('active');\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (viewtab);\r\n\n\n//# sourceURL=webpack://awesomebookses6/./src/js/operation.js?");
 
 /***/ }),
 
